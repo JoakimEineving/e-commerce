@@ -1,4 +1,5 @@
 import Navbar from './components/navbar/navbar';
+import ProductCard from './components/productCard/productCard';
 import React from "react";
 import './App.css'
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <div className='app'>
     <Navbar />
+    <ProductCard />
     </div>
   )
 }
