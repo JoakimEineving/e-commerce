@@ -1,36 +1,43 @@
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const ProductCard = () => {
-  const [data, setData] = useState({});
+    const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get('http://localhost:3000/');
-      setData(result.data);
+    const getProducts = async () => {
+      try {
+        const res = await axios.get('http://localhost:3000/products/getProducts');
+        setProducts(res.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    fetchData();
+    getProducts();
   }, []);
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
-      <figure>
-        <img
-          src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-          alt="Shoes"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+    <div className="flex flex-row m-3"> 
+      {products.length > 0
+            ? products.map((product) => (
+        <div key={product._id} className="m-2 shadow-xl">
+          <figure>
+            <img
+              src={product.thumbnail}
+              alt="Product Image"
+            />
+          </figure>
+          <div className="card-body w-96 ">
+            <h2 className="card-title">{product.title}</h2>
+            <p>{product.description}</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-primary">Buy Now</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-      <p>{JSON.stringify(data)}</p>
+      ))
+      : 'No products found'}
     </div>
-    </div>
+    
   );
 };
 
