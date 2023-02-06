@@ -6,7 +6,7 @@ const UploadForm = () => {
     const [price, setPrice] = useState('');
     const [thumbnail, setThumbnail] = useState('');
     const [description, setDescription] = useState('');
-    const [products, setProducts] = useState([]);
+    
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -17,7 +17,7 @@ const UploadForm = () => {
           thumbnail,
           description
         });
-        setProducts([...products, res.data]);
+        
         setTitle('');
         setPrice('');
         setThumbnail('');

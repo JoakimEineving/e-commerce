@@ -1,18 +1,21 @@
-import Navbar from './components/navbar/navbar';
-import ProductCard from './components/productCard/productCard';
 import React from "react";
 import './App.css'
-import UploadForm from './components/uploadForm/uploadForm';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from './pages/landingPage/landingPage';
+import Navbar from "./components/navbar/navbar";
+
+import AdminPage from "./pages/adminPage/adminPage";
 
 function App() {
   document.title = "E-commerce";
 
   return (
-    <div className='app'>
-    <Navbar />
-    <ProductCard />
-    <UploadForm />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

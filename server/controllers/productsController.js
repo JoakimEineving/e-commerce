@@ -19,6 +19,20 @@ const getProducts = async function (req, res) {
   }
 };
 
-const products = { uploadProduct, getProducts };
+const deleteProduct = async function (req, res) {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (product) {
+            await product.remove();
+            res.json({ message: 'Product removed' });
+        } else {
+            res.status(404).json({ message: 'Product not found' });
+        }
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+const products = { uploadProduct, getProducts, deleteProduct };
 
 module.exports = products;

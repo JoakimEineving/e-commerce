@@ -16,10 +16,10 @@ const ProductCard = () => {
     getProducts();
   }, []);
   return (
-    <div className="flex flex-row m-3"> 
+    <div className="flex flex-row m-3 flex-wrap"> 
       {products.length > 0
             ? products.map((product) => (
-        <div key={product._id} className="m-2 shadow-xl">
+        <div key={product._id} className="m-2 shadow-xl flex-wrap">
           <figure>
             <img
               src={product.thumbnail}
