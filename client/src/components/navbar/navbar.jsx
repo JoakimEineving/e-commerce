@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="navbar bg-base-200">
       <div className="flex-1">
       <Link to="/">
-        <a className="btn btn-ghost normal-case text-xl">E-com store</a>
+        <span className="btn btn-ghost normal-case text-xl">E-com store</span>
       </Link>
       </div>
       <div className="flex-none">
@@ -55,17 +55,17 @@ const Navbar = () => {
           >
             <li>
               <Link to="/admin">
-            <a className="justify-between">
-              Upload product
-              <span className="badge">New</span>
-            </a>
+            <span className="justify-between">
+              Admin Panel
+              <span className="badge ml-2">New</span>
+            </span>
           </Link>
             </li>
             <li>
-              <a>Settings</a>
+              <span>Settings</span>
             </li>
             <li>
-              <a>Logout</a>
+              <span>Logout</span>
             </li>
           </ul>
         </div>
