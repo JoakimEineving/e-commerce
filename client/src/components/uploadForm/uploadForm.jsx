@@ -44,7 +44,7 @@ const UploadForm = () => {
         />
         <input
           type="text"
-          placeholder="Thumbnail"
+          placeholder="Image link"
           className="input input-bordered w-full max-w-xs m-2"
           value={thumbnail}
           onChange={(e) => setThumbnail(e.target.value)}

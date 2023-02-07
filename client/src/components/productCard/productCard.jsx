@@ -16,7 +16,24 @@ const ProductCard = () => {
       }
     };
     getProducts();
+    
   }, []);
+
+  const addToCart = (product) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    //check if product already exists in cart, if so, quantity++
+    if (cart.find((item) => item._id === product._id)) {
+      cart.map((item) => {
+        if (item._id === product._id) {
+          item.quantity++;
+        }
+      });
+    }else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(product)
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -30,7 +47,7 @@ const ProductCard = () => {
     }
   };
   return (
-    <div className="flex justify-between flex-row m-3 flex-wrap ">
+    <div className="flex justify-around flex-row m-3 flex-wrap ">
       {products.length > 0
         ? products.map((product) => (
             <div key={product._id} className="m-2 shadow-xl flex-wrap ">
@@ -53,7 +70,7 @@ const ProductCard = () => {
                 <p className="card-subtitle text-gray-600">
                   {`${product.price}$`}
                 </p>
-                  <button className="btn btn-primary">Buy Now</button>
+                  <button className="btn btn-primary" onClick={() => addToCart(product)} >Buy Now</button>
                 </div>
               </div>
             </div>
