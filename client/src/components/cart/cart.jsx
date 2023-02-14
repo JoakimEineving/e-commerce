@@ -1,29 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ProgressBar from "./progressBar";
+import useCart from "./useCart";
 
-const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
+const ShoppingCart = () => {
+  const {
+    cartItems,
+    cartTotal,
+    clearCart,
+    handleSubtractQuantity,
+    handleAddQuantity,
+  } = useCart();
 
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(cart);
-    setCartTotal(
-      cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    );
-  }, []);
-
-  const clearCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const newCart = cart.filter((item) => item._id !== product._id);
-    localStorage.setItem("cart", JSON.stringify(newCart));
-    setCartItems(newCart);
-  };
-
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    console.log(cartItems);
-  }, [cartItems]);
 
   return (
     <div className="container p-8 mx-auto mt-12 bg-white">
@@ -54,14 +42,14 @@ const Cart = () => {
                 </td>
                 <td className="p-4 px-6 text-center whitespace-nowrap">
                   <div>
-                    <button className="px-2 py-0 shadow">-</button>
+                    <button className="px-2 py-0 shadow" onClick={() => handleSubtractQuantity(product)}>-</button>
                     <input
                       type="text"
                       name="qty"
                       value={product.quantity}
                       className="w-12 text-center bg-gray-100 outline-none"
                     />
-                    <button className="px-2 py-0 shadow">+</button>
+                    <button className="px-2 py-0 shadow" onClick={() => handleAddQuantity(product)}>+</button>
                   </div>
                 </td>
 
@@ -98,6 +86,7 @@ const Cart = () => {
             Cannel
           </button>
             </Link>
+            <Link to="/checkout/shipping">
           <button
             className="
                 px-6
@@ -109,17 +98,11 @@ const Cart = () => {
           >
             Proceed to Checkout
           </button>
+            </Link>
         </div>
-        <div className="flex justify-center mt-8">
-          <ul className="steps steps-vertical lg:steps-horizontal">
-            <li className="step step-primary">Add Product</li>
-            <li className="step step-primary">Shopping Cart</li>
-            <li className="step">Checkout</li>
-            <li className="step">Receive Product</li>
-          </ul>
-        </div>
+        <ProgressBar step={2} />
       </div>
     </div>
   );
 };
-export default Cart;
+export default ShoppingCart;

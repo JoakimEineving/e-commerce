@@ -1,15 +1,14 @@
 import React from "react";
-import Shipping from "../../components/cart/shipping";
+import ShoppingCart from "../../components/cart/cart";
 import Navbar from "../../components/navbar/navbar";
 
-const Checkout = () => {
+const Cart = () => {
   return (
     <div>
       <Navbar />
-        <Shipping />
-      
+      <ShoppingCart />
     </div>
   );
 };
 
-export default Checkout;
+export default Cart;
