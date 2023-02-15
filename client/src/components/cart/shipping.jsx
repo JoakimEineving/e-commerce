@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import ProgressBar from "./progressBar";
-import useCart from "../../hooks/useCart";
+import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
+import { subtractQuantity } from "../../redux/cartSlice";
+
+
+
 import axios from "axios";
 
 const Shipping = () => {
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
-  const { cartItems, cartTotal, handleSubtractQuantity } = useCart();
+  
+  const cartItems = useSelector(state => state.cart);
+  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const handleSubtractQuantity = (product) => {
+    dispatch(subtractQuantity(product));
+  };
+
 
   //send order to backend
   const handleCheckout = async (e) => {
