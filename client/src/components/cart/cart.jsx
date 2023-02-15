@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProgressBar from "./progressBar";
-import useCart from "./useCart";
+import useCart from "../../hooks/useCart";
 
 const ShoppingCart = () => {
   const {
@@ -12,13 +12,13 @@ const ShoppingCart = () => {
     handleAddQuantity,
   } = useCart();
 
-
   return (
     <div className="container p-8 mx-auto mt-12 bg-white">
       <div className="w-full overflow-x-auto">
         <div className="my-2">
           <h3 className="text-xl font-bold tracking-wider">
-            Shopping Cart {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
+            Shopping Cart {cartItems.length}{" "}
+            {cartItems.length === 1 ? "item" : "items"}
           </h3>
         </div>
         <table className="w-full">
@@ -42,14 +42,24 @@ const ShoppingCart = () => {
                 </td>
                 <td className="p-4 px-6 text-center whitespace-nowrap">
                   <div>
-                    <button className="px-2 py-0 shadow" onClick={() => handleSubtractQuantity(product)}>-</button>
+                    <button
+                      className="px-2 py-0 shadow"
+                      onClick={() => handleSubtractQuantity(product)}
+                    >
+                      -
+                    </button>
                     <input
                       type="text"
                       name="qty"
                       value={product.quantity}
                       className="w-12 text-center bg-gray-100 outline-none"
                     />
-                    <button className="px-2 py-0 shadow" onClick={() => handleAddQuantity(product)}>+</button>
+                    <button
+                      className="px-2 py-0 shadow"
+                      onClick={() => handleAddQuantity(product)}
+                    >
+                      +
+                    </button>
                   </div>
                 </td>
 
@@ -73,32 +83,32 @@ const ShoppingCart = () => {
         </table>
 
         <div className="flex justify-center mt-4 space-x-2">
-            <Link to="/">
-          <button
-            className="
+          <Link to="/">
+            <button
+              className="
                 px-6
                 py-3
                 text-sm text-gray-800
                 bg-gray-200
                 hover:bg-gray-400
               "
-          >
-            Cannel
-          </button>
-            </Link>
-            <Link to="/checkout/shipping">
-          <button
-            className="
+            >
+              Cannel
+            </button>
+          </Link>
+          <Link to="/checkout/shipping">
+            <button
+              className="
                 px-6
                 py-3
                 text-sm text-white
                 bg-indigo-500
                 hover:bg-indigo-600
               "
-          >
-            Proceed to Checkout
-          </button>
-            </Link>
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
         </div>
         <ProgressBar step={2} />
       </div>

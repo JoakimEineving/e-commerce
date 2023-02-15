@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const productsRouter = require("./routes/productsRoute");
+const orderRouter = require("./routes/orderRoute");
 
 
 
@@ -35,6 +36,8 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use('/products', productsRouter);
+app.use('/checkout', orderRouter)
+
 
 //https://dummyjson.com/products/search?q=phone&limit=3
 

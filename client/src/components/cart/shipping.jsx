@@ -1,15 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import ProgressBar from "./progressBar";
-import useCart from "./useCart";
+import useCart from "../../hooks/useCart";
+import axios from "axios";
 
 const Shipping = () => {
-  const {
-    cartItems,
-    cartTotal,
-    clearCart,
-    handleSubtractQuantity,
-    handleAddQuantity,
-  } = useCart();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [zip, setZip] = useState("");
+  const { cartItems, cartTotal, handleSubtractQuantity } = useCart();
+
+  //send order to backend
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(cartItems);
+      const order = await axios.post(
+        "http://localhost:3000/checkout/createOrder",
+        {
+          orderItems: cartItems.map((item) => {
+            return {
+              id: item._id,
+              title: item.title,
+              price: item.price,
+              quantity: item.quantity,
+            };
+          }),
+          shippingAddress: {
+            fullName: firstName + " " + lastName,
+            email: email,
+            address: address,
+            city: city,
+            postalCode: zip,
+          },
+          paymentMethod: "paypal",
+          shippingPrice: 10,
+          totalPrice: cartTotal + 10,
+        }
+      );
+      if (order) {
+        localStorage.removeItem("cart");
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setAddress("");
+        setCity("");
+        setZip("");
+        // window.location.href = "/success";
+      }
+      console.log(order);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -24,7 +69,7 @@ const Shipping = () => {
                 <div className="space-x-0 lg:flex lg:space-x-4">
                   <div className="w-full lg:w-1/2">
                     <label
-                      for="firstName"
+                      htmlFor="firstName"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       First Name
@@ -34,60 +79,72 @@ const Shipping = () => {
                       type="text"
                       placeholder="First Name"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                      }}
                     />
                   </div>
                   <div className="w-full lg:w-1/2 ">
                     <label
-                      for="firstName"
+                      htmlFor="lastName"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       Last Name
                     </label>
                     <input
-                      name="Last Name"
+                      name="lastName"
                       type="text"
                       placeholder="Last Name"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="w-full">
                     <label
-                      for="Email"
+                      htmlFor="email"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       Email
                     </label>
                     <input
-                      name="Last Name"
+                      name="email"
                       type="text"
                       placeholder="Email"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
                 <div className="mt-4">
                   <div className="w-full">
                     <label
-                      for="Address"
+                      htmlFor="address"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       Address
                     </label>
                     <input
                       className="w-full mb-3 px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-                      name="Address"
+                      name="address"
                       cols="20"
                       rows="1"
                       placeholder="Address"
+                      onChange={(e) => {
+                        setAddress(e.target.value);
+                      }}
                     ></input>
                   </div>
                 </div>
                 <div className="space-x-0 lg:flex lg:space-x-4">
                   <div className="w-full lg:w-1/2">
                     <label
-                      for="city"
+                      htmlFor="city"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       City
@@ -97,25 +154,34 @@ const Shipping = () => {
                       type="text"
                       placeholder="City"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                      onChange={(e) => {
+                        setCity(e.target.value);
+                      }}
                     />
                   </div>
                   <div className="w-full lg:w-1/2 ">
                     <label
-                      for="postcode"
+                      htmlFor="zip"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       Postcode
                     </label>
                     <input
-                      name="postcode"
+                      name="zip"
                       type="text"
                       placeholder="Post Code"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+                      onChange={(e) => {
+                        setZip(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
                 <div className="mt-4">
-                  <button className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">
+                  <button
+                    className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900"
+                    onClick={handleCheckout}
+                  >
                     Process
                   </button>
                 </div>
@@ -124,17 +190,20 @@ const Shipping = () => {
             </form>
           </div>
           <div className="flex flex-col w-full ml-0 lg:ml-12 lg:w-2/5">
-            <div class="pt-12 md:pt-0 2xl:ps-4">
-              <h2 clasNames="text-xl font-bold">Order Summary</h2>
+            <div className="pt-12 md:pt-0 2xl:ps-4">
+              <h2 className="text-xl font-bold">Order Summary</h2>
               <div className="mt-8">
                 {cartItems.map((product) => (
-                  <div className="flex flex-col space-y-4 pb-2" key={product._id}>
+                  <div
+                    className="flex flex-col space-y-4 pb-2"
+                    key={product._id}
+                  >
                     <div className="flex space-x-4">
                       <div>
                         <img className="h-28 w-46" src={product.thumbnail} />
                       </div>
                       <div>
-                        <h2 class="text-xl font-bold">{product.title}</h2>$
+                        <h2 className="text-xl font-bold">{product.title}</h2>$
                         {product.price}
                         {product.quantity > 1 && ` x ${product.quantity}`}
                       </div>

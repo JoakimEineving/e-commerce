@@ -7,7 +7,7 @@ const UploadForm = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async (e) => {
+  const uploadProduct = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:3000/products/upload", {
@@ -27,7 +27,7 @@ const UploadForm = () => {
   return (
     <div className="flex">
       <h1 className="m-5">Upload New Product</h1>
-      <form onSubmit={handleSubmit} className="m-2">
+      <form onSubmit={uploadProduct} className="m-2">
         <input
           type="text"
           placeholder="Title"
