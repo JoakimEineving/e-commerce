@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addItem } from '../../redux/cartSlice';
 
 const ProductCard = () => {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProducts = async () => {
@@ -18,22 +21,6 @@ const ProductCard = () => {
     getProducts();
     
   }, []);
-
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    //check if product already exists in cart, if so, quantity++
-    if (cart.find((item) => item._id === product._id)) {
-      cart.map((item) => {
-        if (item._id === product._id) {
-          item.quantity++;
-        }
-      });
-    }else {
-      cart.push({ ...product, quantity: 1 });
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    console.log(product)
-  };
 
   const handleDelete = async (id) => {
     try {
@@ -70,7 +57,7 @@ const ProductCard = () => {
                 <p className="card-subtitle text-gray-600">
                   {`${product.price}$`}
                 </p>
-                  <button className="btn btn-primary" onClick={() => addToCart(product)} >Buy Now</button>
+                  <button className="btn btn-primary" onClick={() => dispatch(addItem(product))} >Buy Now</button>
                 </div>
               </div>
             </div>

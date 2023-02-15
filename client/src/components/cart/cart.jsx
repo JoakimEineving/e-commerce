@@ -1,16 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "./progressBar";
-import useCart from "../../hooks/useCart";
+import {
+  removeItem,
+  subtractQuantity,
+  addQuantity,
+} from "../../redux/cartSlice";
 
 const ShoppingCart = () => {
-  const {
-    cartItems,
-    cartTotal,
-    clearCart,
-    handleSubtractQuantity,
-    handleAddQuantity,
-  } = useCart();
+  const cartItems = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleSubtractQuantity = (product) => {
+    dispatch(subtractQuantity(product));
+  };
+
+  const handleAddQuantity = (product) => {
+    dispatch(addQuantity(product));
+  };
+
+  const handleRemoveItem = (product) => {
+    dispatch(removeItem(product));
+  };
 
   return (
     <div className="container p-8 mx-auto mt-12 bg-white">
@@ -30,14 +42,12 @@ const ShoppingCart = () => {
               <th className="px-6 py-3 font-bold whitespace-nowrap">Remove</th>
             </tr>
           </thead>
+
           <tbody>
             {cartItems.map((product) => (
-              <tr>
-                <td
-                  className="p-4 px-6 text-center whitespace-nowrap object-contain h-28 w-56"
-                  key={product._id}
-                >
-                  <img classname=" " src={product.thumbnail} />
+              <tr key={product._id}>
+                <td className="p-4 px-6 text-center whitespace-nowrap object-contain h-28 w-56">
+                  <img className=" " src={product.thumbnail} />
                   {product.title}
                 </td>
                 <td className="p-4 px-6 text-center whitespace-nowrap">
@@ -70,7 +80,7 @@ const ShoppingCart = () => {
                 <td className="p-4 px-6 text-center whitespace-nowrap">
                   <button
                     className="px-2 py-0 text-red-100 bg-red-600 rounded"
-                    onClick={() => clearCart(product)}
+                    onClick={() => handleRemoveItem(product)}
                   >
                     x
                   </button>
@@ -93,7 +103,7 @@ const ShoppingCart = () => {
                 hover:bg-gray-400
               "
             >
-              Cannel
+              Cancel
             </button>
           </Link>
           <Link to="/checkout/shipping">

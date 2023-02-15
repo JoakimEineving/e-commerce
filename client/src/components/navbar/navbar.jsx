@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 
 const Navbar = () => {
-  
-    const [cartItemsNum, setCartItemsNum] = useState(0);
-    const [cartTotal, setCartTotal] = useState(0);
-  
-    useEffect(() => {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartItemsNum(cart.length);
-      setCartTotal(cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
-    }, []);
+  const cartItems = useSelector(state => state.cart);
+  const cartItemsNum = cartItems.length;
+  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="navbar bg-base-200 shadow-md">
