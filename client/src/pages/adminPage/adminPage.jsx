@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from '../../components/navbar/navbar';
-import UploadForm from '../../components/uploadForm/uploadForm';
+import  OrdersOverview from '../../components/admin/ordersOverview';
+import UploadForm from '../../components/admin/uploadForm';
 
 const AdminPage = () => {
     
@@ -8,6 +9,7 @@ const AdminPage = () => {
         <div >
             <Navbar />
             <UploadForm />
+            <OrdersOverview />
         </div>
     )
 }

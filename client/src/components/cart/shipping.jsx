@@ -15,7 +15,7 @@ const Shipping = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   
   const cartItems = useSelector(state => state.cart);
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -31,7 +31,7 @@ const Shipping = () => {
     try {
       console.log(cartItems);
       const order = await axios.post(
-        "http://localhost:3000/checkout/createOrder",
+        "http://localhost:3000/orders/createOrder",
         {
           orderItems: cartItems.map((item) => {
             return {
@@ -46,7 +46,7 @@ const Shipping = () => {
             email: email,
             address: address,
             city: city,
-            postalCode: zip,
+            postalCode: postalCode,
           },
           paymentMethod: "paypal",
           shippingPrice: 10,
@@ -60,7 +60,7 @@ const Shipping = () => {
         setEmail("");
         setAddress("");
         setCity("");
-        setZip("");
+        setPostalCode("");
         // window.location.href = "/success";
       }
       console.log(order);
@@ -174,18 +174,18 @@ const Shipping = () => {
                   </div>
                   <div className="w-full lg:w-1/2 ">
                     <label
-                      htmlFor="zip"
+                      htmlFor="postalCode"
                       className="block mb-3 text-sm font-semibold text-gray-500"
                     >
                       Postcode
                     </label>
                     <input
-                      name="zip"
+                      name="postalCode"
                       type="text"
                       placeholder="Post Code"
                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                       onChange={(e) => {
-                        setZip(e.target.value);
+                        setPostalCode(e.target.value);
                       }}
                     />
                   </div>

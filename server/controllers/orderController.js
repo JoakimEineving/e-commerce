@@ -3,7 +3,15 @@ const Order = require("../models/orderModel");
 //create new order
 const createOrder = async (req, res) => {
   try {
-    const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, shippingPrice, totalPrice } = req.body;
+    const {
+      orderItems,
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+    } = req.body;
 
     if (orderItems && orderItems.length === 0) {
       res.status(400);
@@ -16,9 +24,7 @@ const createOrder = async (req, res) => {
         shippingPrice,
         totalPrice,
       });
-
       const createdOrder = await order.save();
-
       res.status(201).json(createdOrder);
     }
   } catch (error) {
@@ -26,6 +32,15 @@ const createOrder = async (req, res) => {
   }
 };
 
-const orders = {createOrder}
+const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({});
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-module.exports = orders
+const orders = { createOrder, getOrders };
+
+module.exports = orders;

@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 app.use('/products', productsRouter);
-app.use('/checkout', orderRouter)
+app.use('/orders', orderRouter)
 
 
 //https://dummyjson.com/products/search?q=phone&limit=3
