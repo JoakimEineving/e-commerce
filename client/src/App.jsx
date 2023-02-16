@@ -3,8 +3,8 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from './pages/landingPage/landingPage';
 import AdminPage from "./pages/adminPage/adminPage";
-import Cart from "./pages/checkout/cart";
-import Checkout from "./pages/checkout/checkout";
+import Cart from "./pages/checkout/cartPage";
+import Checkout from "./pages/checkout/checkoutPage";
 // import Shipping from "./pages/checkout/shipping";
 
 
