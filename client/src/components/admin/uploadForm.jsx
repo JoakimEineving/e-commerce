@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import productsService from "../../services/productsService";
 
 const UploadForm = () => {
   const [title, setTitle] = useState("");
@@ -7,27 +7,26 @@ const UploadForm = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [description, setDescription] = useState("");
 
-  const uploadProduct = async (e) => {
+  const handleProductSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:3000/products/upload", {
-        title,
-        price,
-        thumbnail,
-        description,
-      });
+    const productData = {
+      title,
+      price,
+      thumbnail,
+      description,
+    };
+    const uploadedProduct = await productsService.uploadProduct(productData);
+    if (uploadedProduct) {
       setTitle("");
       setPrice("");
       setThumbnail("");
       setDescription("");
-    } catch (error) {
-      console.error(error);
     }
   };
   return (
     <div className="flex">
       <h1 className="m-5">Upload New Product</h1>
-      <form onSubmit={uploadProduct} className="m-2">
+      <form onSubmit={handleProductSubmit} className="m-2">
         <input
           type="text"
           placeholder="Title"
@@ -61,36 +60,42 @@ const UploadForm = () => {
         </button>
       </form>
       <div className="flex flex-row m-3 flex-wrap">
-            <h1 className="">Preview:</h1>
-            <div className="m-2 shadow-xl flex-wrap">
-              <figure>
-                <img src={thumbnail === "" ? "https://dummyimage.com/400x300/000/fff" : ""} alt="Product Image" />
-              </figure>
-              <div className="card-body w-96 ">
-                <h2 className="card-title">
-                  {title === "" ? "Product Title" : title}
-                  <button >
-                    <img
-                      className="w-5"
-                      src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                    />
-                  </button>
-                </h2>
+        <h1 className="">Preview:</h1>
+        <div className="m-2 shadow-xl flex-wrap">
+          <figure>
+            <img
+              src={
+                thumbnail === "" ? "https://dummyimage.com/400x300/000/fff" : ""
+              }
+              alt="Product Image"
+            />
+          </figure>
+          <div className="card-body w-96 ">
+            <h2 className="card-title">
+              {title === "" ? "Product Title" : title}
+              <button>
+                <img
+                  className="w-5"
+                  src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
+                />
+              </button>
+            </h2>
 
-                <p>{description === "" ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore." : description}</p>
-                <div className="card-actions justify-end">
-                <p className="card-subtitle text-gray-600">
-                  {`${price}$` === "$" ? "0000$" : `${price}$`}
-                </p>
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
+            <p>
+              {description === ""
+                ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore."
+                : description}
+            </p>
+            <div className="card-actions justify-end">
+              <p className="card-subtitle text-gray-600">
+                {`${price}$` === "$" ? "0000$" : `${price}$`}
+              </p>
+              <button className="btn btn-primary">Buy Now</button>
             </div>
-          
+          </div>
+        </div>
+      </div>
     </div>
-    
-    </div>
-    
   );
 };
 

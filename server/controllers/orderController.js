@@ -35,7 +35,7 @@ const createOrder = async (req, res) => {
 const getOrders = async (req, res) => {
   try {
     const orders = await Order.find({});
-    res.json(orders);
+    res.json(orders.reverse());
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

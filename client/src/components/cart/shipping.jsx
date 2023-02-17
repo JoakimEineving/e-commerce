@@ -3,11 +3,7 @@ import ProgressBar from "./progressBar";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 import { subtractQuantity } from "../../redux/cartSlice";
-
-
-
-
-import axios from "axios";
+import ordersService from "../../services/ordersService";
 
 const Shipping = () => {
   const dispatch = useDispatch();
@@ -25,50 +21,40 @@ const Shipping = () => {
     dispatch(subtractQuantity(product));
   };
 
-
-  //send order to backend
   const handleCheckout = async (e) => {
     e.preventDefault();
-    try {
-      console.log(cartItems);
-      const order = await axios.post(
-        "http://localhost:3000/orders/createOrder",
-        {
-          orderNumber: Math.floor(Date.now() + Math.random()),
-          orderItems: cartItems.map((item) => {
-            return {
-              id: item._id,
-              title: item.title,
-              price: item.price,
-              quantity: item.quantity,
-            };
-          }),
-          shippingAddress: {
-            fullName: firstName + " " + lastName,
-            email: email,
-            address: address,
-            city: city,
-            postalCode: postalCode,
-          },
-          paymentMethod: "paypal",
-          shippingPrice: 10,
-          totalPrice: cartTotal + 10,
-        }
-      );
-      if (order) {
-        localStorage.removeItem("cart");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setAddress("");
-        setCity("");
-        setPostalCode("");
+    const orderData = {
+      orderNumber: Math.floor(Date.now() + Math.random()),
+      orderItems: cartItems.map((item) => ({
+        id: item._id,
+        title: item.title,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      shippingAddress: {
+        fullName: firstName + ' ' + lastName,
+        email,
+        address,
+        city,
+        postalCode,
+      },
+      paymentMethod: 'paypal',
+      shippingPrice: 10,
+      totalPrice: cartTotal + 10,
+    };
 
-        // window.location.href = "/success";
-      }
-      console.log(order);
-    } catch (error) {
-      console.log(error);
+    const createdOrder = await ordersService.createOrder(orderData);
+
+    if (createdOrder) {
+      localStorage.removeItem('cart');
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setAddress('');
+      setCity('');
+      setPostalCode('');
+
+      // window.location.href = "/success";
     }
   };
 

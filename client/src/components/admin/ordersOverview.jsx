@@ -1,52 +1,39 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import ordersService from "../../services/ordersService";
 
 const OrdersOverview = () => {
   const [orders, setOrders] = useState([]);
-
   useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const res = await axios.get("http://localhost:3000/orders/getOrders");
-        setOrders(res.data);
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchOrders = async () => {
+      const ordersData = await ordersService.getOrders();
+      setOrders(ordersData);
     };
-    getOrders();
+
+    fetchOrders();
   }, []);
 
-  const orderPaid = async (orderNumber) => {
-    try {
-      const res = await axios.post(
-        `http://localhost:3000/orders/orderPaid/${orderNumber}`
-      );
-      console.log(res.data);
+  const handleOrderPaid = async (orderNumber) => {
+    const updatedOrder = await ordersService.orderPaid(orderNumber);
+    if (updatedOrder) {
       setOrders(
         orders.map((order) =>
-          order.orderNumber === orderNumber ? res.data : order
+          order.orderNumber === orderNumber ? updatedOrder : order
         )
       );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const orderDelivered = async (orderNumber) => {
-    try {
-      const res = await axios.post(
-        `http://localhost:3000/orders/orderDelivered/${orderNumber}`
-      );
-      console.log(res.data);
-      setOrders(
-        orders.map((order) =>
-          order.orderNumber === orderNumber ? res.data : order
-        )
-      );
-    } catch (error) {
-      console.error(error);
     }
   };
 
+  const handleOrderDelivered = async (orderNumber) => {
+    const updatedOrder = await ordersService.orderDelivered(orderNumber);
+    if (updatedOrder) {
+      setOrders(
+        orders.map((order) =>
+          order.orderNumber === orderNumber ? updatedOrder : order
+        )
+      );
+    }
+  };
+  
   return (
     <div>
       <h1 className="text-3xl font-bold flex justify-center">
@@ -72,18 +59,20 @@ const OrdersOverview = () => {
                     " Order: " +
                     order.orderNumber}
                 </p>
-                <button
-                  className="btn btn-primary mr-1 "
-                  onClick={() => orderDelivered(order.orderNumber)}
-                >
-                  Mark as Paid
-                </button>
-                <button
-                  className="btn btn-primary  "
-                  onClick={() => orderDelivered(order.orderNumber)}
-                >
-                  Mark as Delivered
-                </button>
+                <div className="mt-2">
+                  <button
+                    className="btn btn-sm mr-1"
+                    onClick={() => handleOrderPaid(order.orderNumber)}
+                  >
+                    Mark as Paid
+                  </button>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() => handleOrderDelivered(order.orderNumber)}
+                  >
+                    Mark as Delivered
+                  </button>
+                </div>
               </div>
               <div>
                 <p className="text-lg font-medium">${order.totalPrice}</p>
