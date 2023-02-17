@@ -4,11 +4,10 @@ const Order = require("../models/orderModel");
 const createOrder = async (req, res) => {
   try {
     const {
+      orderNumber,
       orderItems,
       shippingAddress,
       paymentMethod,
-      itemsPrice,
-      taxPrice,
       shippingPrice,
       totalPrice,
     } = req.body;
@@ -18,6 +17,7 @@ const createOrder = async (req, res) => {
       throw new Error("No order items");
     } else {
       const order = new Order({
+        orderNumber,
         orderItems,
         shippingAddress,
         paymentMethod,
@@ -41,6 +41,23 @@ const getOrders = async (req, res) => {
   }
 };
 
-const orders = { createOrder, getOrders };
+const orderPaid = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.orderNumber);
+    if (order) {
+      order.isPaid = true;
+      order.paidAt = Date.now();
+    }
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+    
+
+
+const orders = { createOrder, getOrders, orderPaid };
 
 module.exports = orders;

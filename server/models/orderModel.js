@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
   orderNumber: {
     type: String,
-    required: false,
+    unique: true,
+    required: true,
   },
   dateCreated: {
     type: Date,

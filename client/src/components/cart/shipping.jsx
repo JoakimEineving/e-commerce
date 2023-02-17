@@ -6,6 +6,7 @@ import { subtractQuantity } from "../../redux/cartSlice";
 
 
 
+
 import axios from "axios";
 
 const Shipping = () => {
@@ -33,6 +34,7 @@ const Shipping = () => {
       const order = await axios.post(
         "http://localhost:3000/orders/createOrder",
         {
+          orderNumber: Math.floor(Date.now() + Math.random()),
           orderItems: cartItems.map((item) => {
             return {
               id: item._id,
@@ -61,6 +63,7 @@ const Shipping = () => {
         setAddress("");
         setCity("");
         setPostalCode("");
+
         // window.location.href = "/success";
       }
       console.log(order);
