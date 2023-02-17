@@ -43,21 +43,42 @@ const getOrders = async (req, res) => {
 
 const orderPaid = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.orderNumber);
+    const order = await Order.findOne({ orderNumber: req.params.orderNumber });
     if (order) {
       order.isPaid = true;
       order.paidAt = Date.now();
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404);
+      throw new Error("Order not found");
     }
-    const updatedOrder = await order.save();
-    res.json(updatedOrder);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
+const orderDelivered = async (req, res) => {
+  try {
+    const order = await Order.findOne({ orderNumber: req.params.orderNumber });
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
     
 
 
-const orders = { createOrder, getOrders, orderPaid };
+const orders = { createOrder, getOrders, orderPaid, orderDelivered };
 
 module.exports = orders;
