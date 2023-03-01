@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ProgressBar from "./progressBar";
+import ProgressBar from "./ProgressBar";
 import {
   removeItem,
   subtractQuantity,
   addQuantity,
-} from "../../redux/cartSlice";
+} from "../../Redux/CartSlice";
 
 const ShoppingCart = () => {
   const cartItems = useSelector((state) => state.cart);

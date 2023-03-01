@@ -1,7 +1,5 @@
 import React from "react"
-import Navbar from '../../components/navbar/navbar';
-import  OrdersOverview from '../../components/admin/ordersOverview';
-import UploadForm from '../../components/admin/uploadForm';
+import { Navbar, OrdersOverview, UploadForm } from '../../components/index';
 
 const AdminPage = () => {
     

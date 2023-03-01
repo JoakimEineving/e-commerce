@@ -1,8 +1,5 @@
 import React from "react"
-import Navbar from '../../components/navbar/navbar';
-import ProductCard from '../../components/productCard/productCard';
-import Footer from "../../components/footer/footer";
-import Header from "../../components/header/header";
+import { Navbar, Header, ProductCard, Footer } from '../../components/index';
 
 const LandingPage = () => {
     

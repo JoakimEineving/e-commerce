@@ -2,3 +2,7 @@
 *::-webkit-scrollbar {
     display: none;
   }
+
+:root{
+  background-color: lightgrey !important;
+}

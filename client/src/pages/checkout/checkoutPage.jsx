@@ -1,6 +1,5 @@
 import React from "react";
-import Shipping from "../../components/cart/shipping";
-import Navbar from "../../components/navbar/navbar";
+import { Navbar, Shipping } from "../../components/index";
 
 const Checkout = () => {
   return (

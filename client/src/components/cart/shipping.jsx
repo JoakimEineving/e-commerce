@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProgressBar from "./progressBar";
+import ProgressBar from "./ProgressBar";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { subtractQuantity } from "../../redux/cartSlice";
+import { subtractQuantity } from "../../Redux/CartSlice";
 import ordersService from "../../services/ordersService";
 
 const Shipping = () => {

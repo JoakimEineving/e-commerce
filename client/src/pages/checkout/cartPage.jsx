@@ -1,6 +1,5 @@
 import React from "react";
-import ShoppingCart from "../../components/cart/cart";
-import Navbar from "../../components/navbar/navbar";
+import { Navbar, ShoppingCart } from "../../components/index";
 
 const Cart = () => {
   return (
