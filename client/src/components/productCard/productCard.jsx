@@ -1,38 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { addItem } from '../../Redux/CartSlice';
+import { addItem } from '../../redux/CartSlice';
+import useProduct from "../../hooks/useProduct";
 
 const ProductCard = () => {
-  const [products, setProducts] = useState([]);
+  const [products, handleDelete] = useProduct();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get(
-          "http://localhost:3000/products/getProducts"
-        );
-        setProducts(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getProducts();
-    
-  }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3000/products/delete/${id}`
-      );
-      console.log(response.data.message);
-      setProducts(products.filter((product) => product._id !== id));
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  
   return (
     <div className="flex justify-around flex-row m-3 flex-wrap ">
       {products.length > 0
@@ -44,12 +18,6 @@ const ProductCard = () => {
               <div className="card-body w-96 ">
                 <h2 className="card-title">
                   {product.title}
-                  <button onClick={() => handleDelete(product._id)}>
-                    <img
-                      className="w-5"
-                      src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                    />
-                  </button>
                 </h2>
 
                 <p>{product.description}</p>
