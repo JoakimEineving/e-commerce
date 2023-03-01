@@ -75,10 +75,26 @@ const orderDelivered = async (req, res) => {
   }
 };
 
+const deleteOrder = async (req, res) => {
+  try {
+    const order = await Order.findOne({ orderNumber: req.params.orderNumber });
+    if (order) {
+      await order.remove();
+      res.json({ message: "Order removed" });
+    } else {
+      res.status(404);
+      throw new Error("Order not found");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
     
 
 
-const orders = { createOrder, getOrders, orderPaid, orderDelivered };
+const orders = { createOrder, deleteOrder, getOrders, orderPaid, orderDelivered };
 
 module.exports = orders;

@@ -9,6 +9,24 @@ const getOrders = async () => {
     return [];
   }
 };
+const createOrder = async (orderData) => {
+  try {
+    const res = await axios.post('http://localhost:3000/orders/createOrder', orderData);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+const deleteOrder = async (orderNumber) => {
+  try {
+    const res = await axios.delete(`http://localhost:3000/orders/deleteOrder/${orderNumber}`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 const orderPaid = async (orderNumber) => {
   try {
@@ -29,15 +47,6 @@ const orderDelivered = async (orderNumber) => {
     return null;
   }
 };
-const createOrder = async (orderData) => {
-  try {
-    const res = await axios.post('http://localhost:3000/orders/createOrder', orderData);
-    return res.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
 
 
 
@@ -46,4 +55,5 @@ export default {
   orderPaid,
   orderDelivered,
   createOrder,
+  deleteOrder,
 };
