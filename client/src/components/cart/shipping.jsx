@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { subtractQuantity } from "../../Redux/CartSlice";
+import { subtractQuantity } from "../../redux/CartSlice";
 import ordersService from "../../services/ordersService";
 
 const Shipping = () => {

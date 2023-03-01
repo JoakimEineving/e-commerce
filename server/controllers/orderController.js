@@ -49,6 +49,7 @@ const orderPaid = async (req, res) => {
       order.paidAt = Date.now();
       const updatedOrder = await order.save();
       res.json(updatedOrder);
+      console.log(`Order with id ${req.params.orderNumber} marked as paid`);
     } else {
       res.status(404);
       throw new Error("Order not found");
@@ -66,6 +67,8 @@ const orderDelivered = async (req, res) => {
       order.deliveredAt = Date.now();
       const updatedOrder = await order.save();
       res.json(updatedOrder);
+      console.log(`Order with id ${req.params.orderNumber} marked as delivered`);
+      
     } else {
       res.status(404);
       throw new Error("Order not found");
@@ -81,6 +84,7 @@ const deleteOrder = async (req, res) => {
     if (order) {
       await order.remove();
       res.json({ message: "Order removed" });
+      console.log(`Order with id ${req.params.orderNumber} deleted`);
     } else {
       res.status(404);
       throw new Error("Order not found");

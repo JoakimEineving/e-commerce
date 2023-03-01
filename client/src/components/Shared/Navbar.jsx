@@ -9,7 +9,7 @@ const Navbar = () => {
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
-    <div className="navbar bg-base-200 shadow-md">
+    <div className="sticky top-0 z-50 navbar bg-base-200 shadow-md">
       <div className="flex-1">
       <Link to="/">
         <span className="btn btn-ghost normal-case text-xl">E-com store</span>

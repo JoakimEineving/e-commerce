@@ -5,7 +5,6 @@ const uploadProduct = async function (req, res) {
     const product = new Product(req.body);
     await product.save();
     res.status(201).json({ message: "Product created successfully" });
-    console.log(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

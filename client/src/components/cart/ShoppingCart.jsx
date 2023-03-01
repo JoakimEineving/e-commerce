@@ -6,7 +6,7 @@ import {
   removeItem,
   subtractQuantity,
   addQuantity,
-} from "../../Redux/CartSlice";
+} from "../../redux/CartSlice";
 
 const ShoppingCart = () => {
   const cartItems = useSelector((state) => state.cart);
