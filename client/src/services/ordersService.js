@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { BASE_URL } from '../../config';
+
 
 const getOrders = async () => {
+  console.log(BASE_URL);
   try {
-    const res = await axios.get('http://localhost:3000/orders/getOrders');
+    const res = await axios.get(`${BASE_URL}/orders/getOrders`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -11,7 +14,7 @@ const getOrders = async () => {
 };
 const createOrder = async (orderData) => {
   try {
-    const res = await axios.post('http://localhost:3000/orders/createOrder', orderData);
+    const res = await axios.post(`${BASE_URL}/orders/createOrder`, orderData);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -20,7 +23,7 @@ const createOrder = async (orderData) => {
 };
 const deleteOrder = async (orderNumber) => {
   try {
-    const res = await axios.delete(`http://localhost:3000/orders/deleteOrder/${orderNumber}`);
+    const res = await axios.delete(`${BASE_URL}/orders/deleteOrder/${orderNumber}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -30,7 +33,7 @@ const deleteOrder = async (orderNumber) => {
 
 const orderPaid = async (orderNumber) => {
   try {
-    const res = await axios.post(`http://localhost:3000/orders/orderPaid/${orderNumber}`);
+    const res = await axios.post(`${BASE_URL}/orders/orderPaid/${orderNumber}`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -40,13 +43,15 @@ const orderPaid = async (orderNumber) => {
 
 const orderDelivered = async (orderNumber) => {
   try {
-    const res = await axios.post(`http://localhost:3000/orders/orderDelivered/${orderNumber}`);
+    const res = await axios.post(`${BASE_URL}/orders/orderDelivered/${orderNumber}`);
     return res.data;
   } catch (error) {
     console.error(error);
     return null;
   }
 };
+
+
 
 
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { subtractQuantity } from "../../redux/CartSlice";
+import { subtractQuantity } from "../../redux/cartSlice";
 import ordersService from "../../services/ordersService";
 
 const Shipping = () => {
@@ -54,7 +54,7 @@ const Shipping = () => {
       setCity('');
       setPostalCode('');
 
-      // window.location.href = "/success";
+      window.location.href = "/success";
     }
   };
 
