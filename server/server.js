@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const productsRouter = require("./routes/productsRoute");
 const orderRouter = require("./routes/orderRoute");
+const accountRouter = require("./routes/accountRoute");
 
 
 
@@ -35,12 +36,9 @@ app.get("/", (req, res) => {
 });
 
 app.use(express.json());
+app.use('/accounts', accountRouter);
 app.use('/products', productsRouter);
 app.use('/orders', orderRouter)
-
-
-//https://dummyjson.com/products/search?q=phone&limit=3
-
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
