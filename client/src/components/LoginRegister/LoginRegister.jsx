@@ -1,40 +1,35 @@
-import React, { useState } from "react";
-import accountService from "../../services/accountService";
+import React from "react";
+import { AlertSuccess, AlertWarning, AlertError } from "../index";
+import {useAuth} from "../../hooks/useAuth";
 
 const LoginRegister = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [signUp, setSignUp] = useState(false);
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    alertMessage,
+    alertType,
+    signUp,
+    setSignUp,
+    showAlert,
+    handleSignIn,
+    handleSignUp,
+    handleSignOut,
+  } = useAuth();
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    console.log('submit clicked');
-    try {
-      const accountData = { email, password };
-      const account = await accountService.signIn(accountData);
-      console.log(account);
-      
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    console.log('submit clicked');
-    try {
-      const accountData = { email, password };
-      const createdAccount = await accountService.signUp(accountData);
-      console.log(createdAccount);
-    } catch (error) {
-      console.error(error);
-    } 
-  };
   return (
     <div>
-      <label htmlFor="my-modal-4" className="btn">
-        Login
-      </label>
+      {localStorage.getItem("userId") ? (
+        <button className="btn " onClick={handleSignOut}>
+          Logout
+        </button>
+      ) : (
+        <label htmlFor="my-modal-4" className="btn">
+          Sign In
+        </label>
+      )}
+
       <input type="checkbox" id="my-modal-4" className="modal-toggle" />
       <label htmlFor="my-modal-4" className="modal cursor-pointer">
         <label className="modal-box relative">
@@ -130,6 +125,11 @@ const LoginRegister = () => {
           </div>
         </label>
       </label>
+      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
+            {alertType === "success" && <AlertSuccess msg={alertMessage} />}
+            {alertType === "warning" && <AlertWarning msg={alertMessage} />}
+            {alertType === "error" && <AlertError msg={alertMessage} />}
+          </div>
     </div>
   );
 };
