@@ -11,3 +11,6 @@ export { default as ProgressBar } from "./Cart/ProgressBar";
 export { default as OrdersOverview } from "./Admin/OrdersOverview";
 export { default as UploadForm } from "./Admin/UploadForm";
 export { default as ProductOverview } from "./Admin/ProductOverview";
+
+
+export { default as LoginRegister } from "./loginRegister/LoginRegister";

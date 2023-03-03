@@ -11,8 +11,8 @@ const LoginRegister = () => {
     console.log('submit clicked');
     try {
       const accountData = { email, password };
-      const createdAccount = await accountService.signIn(accountData);
-      console.log(createdAccount);
+      const account = await accountService.signIn(accountData);
+      console.log(account);
       
     } catch (error) {
       console.error(error);
@@ -107,7 +107,7 @@ const LoginRegister = () => {
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  {!signUp &&"Forgot Password?"}
+                  {!signUp && "Forgot Password?"}
                 </a>
               </div>
               <button

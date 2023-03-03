@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { BASE_URL } from '../../config';
-
+import axios from "axios";
+import { BASE_URL } from "../../config";
 
 const getOrders = async () => {
   console.log(BASE_URL);
@@ -23,7 +22,9 @@ const createOrder = async (orderData) => {
 };
 const deleteOrder = async (orderNumber) => {
   try {
-    const res = await axios.delete(`${BASE_URL}/orders/deleteOrder/${orderNumber}`);
+    const res = await axios.delete(
+      `${BASE_URL}/orders/deleteOrder/${orderNumber}`
+    );
     return res.data;
   } catch (error) {
     console.error(error);
@@ -43,17 +44,15 @@ const orderPaid = async (orderNumber) => {
 
 const orderDelivered = async (orderNumber) => {
   try {
-    const res = await axios.post(`${BASE_URL}/orders/orderDelivered/${orderNumber}`);
+    const res = await axios.post(
+      `${BASE_URL}/orders/orderDelivered/${orderNumber}`
+    );
     return res.data;
   } catch (error) {
     console.error(error);
     return null;
   }
 };
-
-
-
-
 
 export default {
   getOrders,

@@ -54,7 +54,7 @@ const Shipping = () => {
       setCity('');
       setPostalCode('');
 
-      window.location.href = "/success";
+      window.location.href = "/";
     }
   };
 

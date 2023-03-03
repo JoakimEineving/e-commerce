@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { BASE_URL } from '../../config';
 
 const uploadProduct = async (productData) => {
   try {
-    const res = await axios.post('http://localhost:3000/products/upload', productData);
+const res = await axios.post(`${BASE_URL}/products/upload`, productData);
     return res.data;
   } catch (error) {
     console.error(error);

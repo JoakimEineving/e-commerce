@@ -8,26 +8,26 @@ const ProductCard = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-around flex-row m-3 flex-wrap ">
+    <div className="flex justify-around flex-row  flex-wrap bg-base-200 ">
       {products.length > 0
         ? products.map((product) => (
-            <div key={product._id} className="m-2 shadow-xl flex-wrap ">
-              <figure>
-                <img src={product.thumbnail} alt="Product Image" />
+            <div key={product._id} className="m-2 shadow-xl flex-wrap  ">
+              <figure className="w-96 ">
+                <img className="object-contain h-48 w-96"src={product.thumbnail} alt="Product Image" />
               </figure>
-              <div className="card-body w-96 ">
-                <h2 className="card-title">{product.title}</h2>
+              <div className="card-body w-96  ">
+                <h2 className="card-title text-gray-300">{product.title}</h2>
 
-                <p>{product.description}</p>
+                <p className="text-gray-400">{product.description}</p>
                 <div className="card-actions justify-end">
-                  <p className="card-subtitle text-gray-600">
+                  <p className="card-subtitle text-gray-300">
                     {`${product.price}$`}
                   </p>
                   <button
                     className="btn btn-primary"
                     onClick={() => dispatch(addItem(product))}
                   >
-                    Buy Now
+                    add to cart
                   </button>
                 </div>
               </div>
