@@ -4,8 +4,9 @@ This is an ecommerce application being developed in the MERN (MongoDB, Express, 
 
 ## Features
 - Shopping cart and checkout
-- Admin page for adding products, managing orders
-- User authentication (register, login, logout) [Planned]
+- Admin page for adding and deleting products, managing orders
+- Register and login as a user and view your previous orders
+- Fast checkout as a registered user [Planned]
 - Payment integration [Planned]
 
 ## Technologies Used
