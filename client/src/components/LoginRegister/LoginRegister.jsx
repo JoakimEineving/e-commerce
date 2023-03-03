@@ -1,22 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import accountService from "../../services/accountService";
 import { AlertSuccess, AlertWarning, AlertError } from "../index";
-import {useAuth} from "../../hooks/useAuth";
 
 const LoginRegister = () => {
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    alertMessage,
-    alertType,
-    signUp,
-    setSignUp,
-    showAlert,
-    handleSignIn,
-    handleSignUp,
-    handleSignOut,
-  } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
+  const [signUp, setSignUp] = useState(false);
+
+  const showAlert = (message, type) => {
+    setAlertMessage(message);
+    setAlertType(type);
+    setTimeout(() => {
+      setAlertMessage("");
+      setAlertType("");
+    }, 2000);
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    console.log("submit clicked");
+    try {
+      const accountData = { email, password };
+      const account = await accountService.signIn(accountData);
+      if (account && account._id) {
+        window.location.href = "/";
+        showAlert("Logged in successfully!", "success");
+      } else {
+        showAlert("Invalid email or password", "error");
+      }
+    } catch (error) {
+      showAlert("Error logging in. Please try again.", "error");
+    }
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const accountData = { email, password };
+      const createdAccount = await accountService.signUp(accountData);
+      if (createdAccount && createdAccount._id) {
+        setEmail("");
+        setPassword("");
+        setSignUp(false);
+        showAlert("Account created successfully! You can now sign in.", "success");
+      }
+    } catch (error) {
+      console.error(error);
+      showAlert("Error creating account. Please try again.", "error");
+    }
+  };
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("userId");
+      showAlert("Logged out successfully!", "success");
+    } catch (error) {
+      console.error(error);
+      showAlert("Error logging out. Please try again.", "error");
+    }
+  };
 
   return (
     <div>

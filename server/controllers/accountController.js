@@ -29,22 +29,15 @@ const signIn = async (req, res) => {
       res.status(400);
       throw new Error("Please provide email and password");
     } else {
-      const account = await Account.findOne({ email });
+      const account = await Account.findOne({ email, password });
       if (!account) {
         res.status(401);
         throw new Error("Invalid email or password");
-      } else {
-        const passwordMatch = await account.matchPassword(password);
-        if (!passwordMatch) {
-          res.status(401);
-          throw new Error("Invalid email or password");
-        } else {
+      }  else {
           res.status(200).json({
-            // _id: account._id,
-            // name: account.name,
-            email: account.email,
+            _id: account._id,
           });
-        }
+        
       }
     }
   } catch (error) {

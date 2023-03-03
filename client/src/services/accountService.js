@@ -34,7 +34,10 @@ const deleteAccount = async (id) => {
 const signIn = async (accountData) => {
   try {
     const res = await axios.post(`${BASE_URL}/accounts/signIn`, accountData);
-    return res.data;
+    if (res.data && res.data._id) {
+      localStorage.setItem("userId", res.data._id);
+      return res.data;
+    }
   } catch (error) {
     console.error(error);
     return null;

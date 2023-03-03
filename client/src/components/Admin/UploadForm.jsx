@@ -73,12 +73,6 @@ const UploadForm = () => {
           <div className="card-body w-96 ">
             <h2 className="card-title">
               {title === "" ? "Product Title" : title}
-              <button>
-                <img
-                  className="w-5"
-                  src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png"
-                />
-              </button>
             </h2>
 
             <p>
