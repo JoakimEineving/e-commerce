@@ -9,7 +9,6 @@ const signUp = async (req, res) => {
       throw new Error("Please fill in all fields");
     } else {
       const account = new Account({
-        
         email,
         password,
       });

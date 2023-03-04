@@ -9,11 +9,10 @@ export { default as Shipping } from "./Cart/Shipping";
 export { default as ProgressBar } from "./Cart/ProgressBar";
 
 export { default as OrdersOverview } from "./Admin/OrdersOverview";
-export { default as UploadForm } from "./Admin/UploadForm";
 export { default as ProductOverview } from "./Admin/ProductOverview";
+export { default as UserOverview } from "./Admin/UserOverview";
+export { default as UploadForm } from "./Admin/UploadForm";
 
 export { default as LoginRegister } from "./loginRegister/LoginRegister";
 
-export { default as AlertSuccess } from "./Alerts/AlertSuccess";
-export { default as AlertError } from "./Alerts/AlertError";
-export { default as AlertWarning } from "./Alerts/AlertWarning";
+export { default as Alert } from "./Alerts/Alert";

@@ -1,5 +1,5 @@
 import React from "react"
-import { Navbar, OrdersOverview, UploadForm, ProductOverview } from '../../components/index';
+import { Navbar, OrdersOverview, UploadForm, ProductOverview, UserOverview } from '../../components/index';
 
 const AdminPage = () => {
     
@@ -9,6 +9,7 @@ const AdminPage = () => {
             <UploadForm />
             <ProductOverview />
             <OrdersOverview />
+            <UserOverview />
         </div>
     )
 }

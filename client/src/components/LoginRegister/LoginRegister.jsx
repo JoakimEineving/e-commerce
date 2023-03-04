@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import accountService from "../../services/accountService";
-import { AlertSuccess, AlertWarning, AlertError } from "../index";
+import { Alert} from "../index"
 
 const LoginRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
-  const [alertType, setAlertType] = useState("");
+  const [alertType, setAlertType] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
   const [signUp, setSignUp] = useState(false);
 
   const showAlert = (message, type) => {
     setAlertMessage(message);
     setAlertType(type);
     setTimeout(() => {
-      setAlertMessage("");
-      setAlertType("");
+      setAlertMessage(null);
+      setAlertType(null);
     }, 2000);
   };
 
@@ -170,9 +170,7 @@ const LoginRegister = () => {
         </label>
       </label>
       <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
-            {alertType === "success" && <AlertSuccess msg={alertMessage} />}
-            {alertType === "warning" && <AlertWarning msg={alertMessage} />}
-            {alertType === "error" && <AlertError msg={alertMessage} />}
+            {alertType && <Alert msg={alertMessage} type={alertType}/>}
           </div>
     </div>
   );

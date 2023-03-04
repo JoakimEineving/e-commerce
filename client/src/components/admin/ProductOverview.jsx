@@ -2,8 +2,8 @@ import React from "react";
 import useProduct from "../../hooks/useProduct";
 
 const ProductOverview = () => {
-    const [products, handleDelete] = useProduct();
-    console.log(products);
+  const [products, handleDelete] = useProduct();
+  console.log(products);
   console.log(products);
   return (
     <div className="overflow-x-auto">
@@ -21,10 +21,10 @@ const ProductOverview = () => {
         </thead>
 
         <tbody>
-          {products.length > 0 && (
-            products.map((product) => (
+          {products.length > 0 &&
+            products.map((product, index) => (
               <tr className="hover " key={product._id}>
-                <th>1</th>
+                <th>{index + 1}</th>
                 <td>{product.title}</td>
                 <td>{product.price}$</td>
                 <td>
@@ -36,10 +36,8 @@ const ProductOverview = () => {
                   </button>
                 </td>
               </tr>
-            ))
-          )}
-            
-              </tbody>
+            ))}
+        </tbody>
       </table>
     </div>
   );
