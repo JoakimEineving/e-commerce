@@ -35,7 +35,7 @@ const signIn = async (accountData) => {
   try {
     const res = await axios.post(`${BASE_URL}/accounts/signIn`, accountData);
     if (res.data && res.data._id) {
-      localStorage.setItem("userId", res.data._id);
+      localStorage.setItem("userId", res.data.token);
       return res.data;
     }
   } catch (error) {
