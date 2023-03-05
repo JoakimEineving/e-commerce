@@ -22,10 +22,15 @@ const useProduct = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(
-        `${BASE_URL}/products/delete/${id}`
+      const token = localStorage.getItem("token");
+      const res = await axios.delete(
+        `${BASE_URL}/admin/deleteProduct/${id}`,{
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
       );
-      console.log(response.data.message);
+      console.log(res.data.message);
       setProducts(products.filter((product) => product._id !== id));
     } catch (error) {
       console.error(error.message);

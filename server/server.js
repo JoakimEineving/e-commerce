@@ -3,9 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const productsRouter = require("./routes/productsRoute");
+const productRouter = require("./routes/productRoute");
 const orderRouter = require("./routes/orderRoute");
 const accountRouter = require("./routes/accountRoute");
+const adminRouter = require("./routes/adminRoute");
 
 
 
@@ -31,14 +32,15 @@ mongoose.connect(uri, {
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Hello World",
+    message: "Welcome to the server",
   });
 });
 
 app.use(express.json());
 app.use('/accounts', accountRouter);
-app.use('/products', productsRouter);
+app.use('/products', productRouter);
 app.use('/orders', orderRouter)
+app.use('/admin', adminRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
