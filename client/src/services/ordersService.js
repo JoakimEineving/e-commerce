@@ -1,29 +1,44 @@
 import axios from "axios";
 import { BASE_URL } from "../../config";
 
-const getOrders = async () => {
-  console.log(BASE_URL);
-  try {
-    const res = await axios.get(`${BASE_URL}/orders/getOrders`);
-    return res.data;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-};
 const createOrder = async (orderData) => {
   try {
-    const res = await axios.post(`${BASE_URL}/orders/createOrder`, orderData);
+    const token = localStorage.getItem("token");
+    const res = await axios.post(`${BASE_URL}/orders/createOrder`, orderData, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.error(error);
     return null;
   }
 };
+const getOrders = async () => {
+  console.log(BASE_URL);
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.get(`${BASE_URL}/admin/getOrders`,{
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
 const deleteOrder = async (orderNumber) => {
   try {
+    const token = localStorage.getItem("token");
     const res = await axios.delete(
-      `${BASE_URL}/orders/deleteOrder/${orderNumber}`
+      `${BASE_URL}/admin/deleteOrder/${orderNumber}`,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     );
     return res.data;
   } catch (error) {
@@ -33,8 +48,14 @@ const deleteOrder = async (orderNumber) => {
 };
 
 const orderPaid = async (orderNumber) => {
+  const token = localStorage.getItem("token");
   try {
-    const res = await axios.post(`${BASE_URL}/orders/orderPaid/${orderNumber}`);
+    const res = await axios.post(`${BASE_URL}/admin/orderPaid/${orderNumber}`,{
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    
     return res.data;
   } catch (error) {
     console.error(error);
@@ -44,8 +65,13 @@ const orderPaid = async (orderNumber) => {
 
 const orderDelivered = async (orderNumber) => {
   try {
+    const token = localStorage.getItem("token");
     const res = await axios.post(
-      `${BASE_URL}/orders/orderDelivered/${orderNumber}`
+      `${BASE_URL}/admin/orderDelivered/${orderNumber}`,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
     );
     return res.data;
   } catch (error) {
