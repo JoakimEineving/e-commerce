@@ -54,7 +54,7 @@ const LoginRegister = () => {
   const handleSignOut = async (e) => {
     e.preventDefault();
     try {
-      localStorage.removeItem("userId");
+      localStorage.removeItem("token");
       showAlert("Logged out successfully!", "success");
     } catch (error) {
       console.error(error);
@@ -64,7 +64,7 @@ const LoginRegister = () => {
 
   return (
     <div>
-      {localStorage.getItem("userId") ? (
+      {localStorage.getItem("token") ? (
         <button className="btn " onClick={handleSignOut}>
           Logout
         </button>
