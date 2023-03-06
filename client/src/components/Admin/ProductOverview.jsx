@@ -2,9 +2,8 @@ import React from "react";
 import useProduct from "../../hooks/useProduct";
 
 const ProductOverview = () => {
-  const [products, handleDelete] = useProduct();
-  console.log(products);
-  console.log(products);
+  const [products, deleteProduct] = useProduct();
+
   return (
     <div className="overflow-x-auto">
       <h1 className="text-3xl font-bold flex justify-center mb-3">
@@ -30,7 +29,7 @@ const ProductOverview = () => {
                 <td>
                   <button
                     className="btn btn-sm"
-                    onClick={() => handleDelete(product._id)}
+                    onClick={() => deleteProduct(product._id)}
                   >
                     Delete
                   </button>

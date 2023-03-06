@@ -20,6 +20,35 @@ const uploadProduct = async (productData) => {
   }
 };
 
+const getProducts = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/products/getProducts`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const deleteProduct = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.delete(
+      `${BASE_URL}/admin/deleteProduct/${id}`,{
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 export default {
   uploadProduct,
+  getProducts,
+  deleteProduct,
 };
