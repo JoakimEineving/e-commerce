@@ -16,3 +16,5 @@ export { default as UploadForm } from "./Admin/UploadForm";
 export { default as LoginRegister } from "./loginRegister/LoginRegister";
 
 export { default as Alert } from "./Alerts/Alert";
+
+export { default as AccessError } from "./Error/AccessError";

@@ -7,6 +7,7 @@ const productRouter = require("./routes/productRoute");
 const orderRouter = require("./routes/orderRoute");
 const accountRouter = require("./routes/accountRoute");
 const adminRouter = require("./routes/adminRoute");
+const authAdmin = require("./middleware/authAdmin");
 
 
 
@@ -40,7 +41,7 @@ app.use(express.json());
 app.use('/accounts', accountRouter);
 app.use('/products', productRouter);
 app.use('/orders', orderRouter)
-app.use('/admin', adminRouter);
+app.use('/admin', authAdmin, adminRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);
