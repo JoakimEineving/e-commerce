@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import accountService from "../../services/accountService";
 import { Alert} from "../index"
+import useAlert from "../../hooks/useAlert";
 
 const LoginRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alertType, setAlertType] = useState(null);
-  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, alertMessage, showAlert] = useAlert();
   const [signUp, setSignUp] = useState(false);
 
-  const showAlert = (message, type) => {
-    setAlertMessage(message);
-    setAlertType(type);
-    setTimeout(() => {
-      setAlertMessage(null);
-      setAlertType(null);
-    }, 2000);
-  };
+
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -169,9 +162,9 @@ const LoginRegister = () => {
           </div>
         </label>
       </label>
-      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
+      
             {alertType && <Alert msg={alertMessage} type={alertType}/>}
-          </div>
+          
     </div>
   );
 };
