@@ -14,11 +14,7 @@ router.delete("/deleteProduct/:id", authAdmin, adminProducts.deleteProduct);
 router.get("/getOrders", authAdmin, adminOrders.getOrders);
 router.delete("/deleteOrder/:orderNumber", authAdmin, adminOrders.deleteOrder);
 router.post("/orderPaid/:orderNumber", authAdmin, adminOrders.orderPaid);
-router.post(
-  "/orderDelivered/:orderNumber",
-  authAdmin,
-  adminOrders.orderDelivered
-);
+router.post("/orderDelivered/:orderNumber", authAdmin, adminOrders.orderDelivered);
 
 //accounts
 router.get("/getAccounts", authAdmin, adminAccounts.getAccounts);

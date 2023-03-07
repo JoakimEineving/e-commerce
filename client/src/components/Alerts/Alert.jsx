@@ -1,7 +1,6 @@
 import React from "react";
 
 const Alert = ({ msg, type }) => {
-  console.log(msg, type);
   return (
     <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-50">
       <div className={`alert alert-${type} shadow-lg`}>

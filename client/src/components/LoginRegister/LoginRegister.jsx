@@ -9,8 +9,6 @@ const LoginRegister = () => {
   const [alertType, alertMessage, showAlert] = useAlert();
   const [signUp, setSignUp] = useState(false);
 
-
-
   const handleSignIn = async (e) => {
     e.preventDefault();
     console.log("submit clicked");
