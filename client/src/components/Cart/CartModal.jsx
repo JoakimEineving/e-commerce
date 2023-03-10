@@ -1,7 +1,6 @@
-import { ShoppingCart, Shipping } from "../index";
+import { ShoppingCart } from "../index";
 
-const CartModal = ({page}) => {
-    console.log(page)
+const CartModal = () => {
   return (
     <div>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -13,13 +12,7 @@ const CartModal = ({page}) => {
           >
             ✕
           </label>
-          {page == "ShoppingCart" ? (
-            <ShoppingCart />
-          ) : page == "Shipping" ? (
-            <Shipping />
-          ) :
-          (
-            <div>Page not found</div>)}
+          <ShoppingCart />
         </div>
       </div>
     </div>

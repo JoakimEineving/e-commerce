@@ -5,7 +5,7 @@ const ProductOverview = () => {
   const [products, deleteProduct] = useProduct();
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto max-w-[1200px] mx-auto">
       <h1 className="text-3xl font-bold flex justify-center mb-3">
         Products Overview
       </h1>

@@ -64,7 +64,7 @@ const Shipping = () => {
         <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
           <div className="flex flex-col md:w-full">
             <h2 className="mb-4 font-bold md:text-xl text-heading ">
-              Shipping Address
+              Shipping Details
             </h2>
             <form className="justify-center w-full mx-auto" method="post">
               <div className="">
@@ -202,7 +202,7 @@ const Shipping = () => {
                   >
                     <div className="flex space-x-4">
                       <div>
-                        <img className="h-28 w-46" src={product.thumbnail} />
+                        <img className="object-contain h-28 w-46" src={product.thumbnail} />
                       </div>
                       <div>
                         <h2 className="text-xl font-bold">{product.title}</h2>$

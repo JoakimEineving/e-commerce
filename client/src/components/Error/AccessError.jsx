@@ -1,4 +1,3 @@
-//navigation
 import { Link } from "react-router-dom";
 
 const AccessError = () => {
