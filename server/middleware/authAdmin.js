@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const authAdmin = async (req, res, next) => {
   try {
-    
     const token = req.headers.authorization;
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     console.log(decodedToken);
@@ -11,7 +10,7 @@ const authAdmin = async (req, res, next) => {
     if (req.userData.isAdmin) {
       next();
     } else {
-      res.status(401).json({ message: 'Authentication failed!' });
+      res.status(403).json({ message: 'Authentication failed!' });
     }
   } catch (error) {
     res.status(401).json({ message: 'Authentication failed!' });
