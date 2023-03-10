@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { LoginRegister } from "../index";
+import { CartModal, LoginRegister, ShoppingCart } from "../index";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -12,15 +12,15 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50 navbar bg-base-200 shadow-md">
+    <div className="sticky top-0 z-50 navbar bg-base-100 shadow-md ">
       <div className="flex-1">
         <Link to="/">
-          <span className="btn btn-ghost normal-case text-xl">E-com store</span>
+          <span className="btn btn-ghost normal-case text-xl">E-commerce</span>
         </Link>
       </div>
       <LoginRegister />
-      
-      <div className="flex-none">
+
+      <div className="flex-none ">
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <div className="indicator">
@@ -53,11 +53,12 @@ const Navbar = () => {
               </span>
               <span className="text-info">Subtotal: ${cartTotal}</span>
               <div className="card-actions">
-                <Link to="/checkout">
-                  <button className="btn btn-primary btn-block">
-                    View cart
-                  </button>
-                </Link>
+                <label
+                  htmlFor="my-modal-3"
+                  className="btn btn-primary btn-block"
+                >
+                  View Cart
+                </label>
               </div>
             </div>
           </div>
@@ -89,7 +90,10 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      <CartModal />
+      
     </div>
+    
   );
 };
 

@@ -19,7 +19,7 @@ const getOrders = async () => {
   console.log(BASE_URL);
   try {
     const token = localStorage.getItem("token");
-    const res = await axios.get(`${BASE_URL}/admin/getOrders`,{
+    const res = await axios.get(`${BASE_URL}/admin/getOrders`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -34,7 +34,8 @@ const deleteOrder = async (orderNumber) => {
   try {
     const token = localStorage.getItem("token");
     const res = await axios.delete(
-      `${BASE_URL}/admin/deleteOrder/${orderNumber}`,{
+      `${BASE_URL}/admin/deleteOrder/${orderNumber}`,
+      {
         headers: {
           Authorization: `${token}`,
         },
@@ -48,14 +49,17 @@ const deleteOrder = async (orderNumber) => {
 };
 
 const orderPaid = async (orderNumber) => {
-  const token = localStorage.getItem("token");
   try {
-    const res = await axios.post(`${BASE_URL}/admin/orderPaid/${orderNumber}`,{
-      headers: {
-        Authorization: `${token}`,
-      },
-    });
-    
+    const token = localStorage.getItem("token");
+    const res = await axios.post(
+      `${BASE_URL}/admin/orderPaid/${orderNumber}`,
+      null,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
     return res.data;
   } catch (error) {
     console.error(error);
@@ -67,7 +71,9 @@ const orderDelivered = async (orderNumber) => {
   try {
     const token = localStorage.getItem("token");
     const res = await axios.post(
-      `${BASE_URL}/admin/orderDelivered/${orderNumber}`,{
+      `${BASE_URL}/admin/orderDelivered/${orderNumber}`,
+      null,
+      {
         headers: {
           Authorization: `${token}`,
         },
@@ -76,6 +82,7 @@ const orderDelivered = async (orderNumber) => {
     return res.data;
   } catch (error) {
     console.error(error);
+    console.log(error);
     return null;
   }
 };

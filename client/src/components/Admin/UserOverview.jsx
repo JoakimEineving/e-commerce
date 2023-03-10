@@ -23,7 +23,7 @@ const UserOverview = () => {
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto max-w-[1200px] mx-auto">
       <h1 className="text-3xl font-bold flex justify-center mb-3">
         User Overview
       </h1>

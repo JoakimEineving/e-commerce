@@ -41,8 +41,8 @@ const OrdersOverview = () => {
   };
 
   return (
-    <div className="">
-      <h1 className="text-3xl font-bold flex justify-center">
+    <div className="max-w-[1200px] mx-auto">
+      <h1 className="text-3xl font-bold flex justify-center ">
         Orders Overview
       </h1>
       {orders.length > 0 ? (
@@ -86,7 +86,7 @@ const OrdersOverview = () => {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="">
                 <p className="text-lg font-medium">${order.totalPrice}</p>
                 <p
                   className={`text-sm font-medium ${

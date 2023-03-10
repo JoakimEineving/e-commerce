@@ -24,7 +24,7 @@ const UploadForm = () => {
     }
   };
   return (
-    <div className="flex">
+    <div className="flex max-w-[1200px] mx-auto">
       <h1 className="m-5">Upload New Product</h1>
       <form onSubmit={handleProductSubmit} className="m-2">
         <input

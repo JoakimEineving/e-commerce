@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ProgressBar from "./ProgressBar";
+import { ProgressBar, CartModal } from "../index";
 import {
   removeItem,
   subtractQuantity,
@@ -25,30 +25,35 @@ const ShoppingCart = () => {
   };
 
   return (
-    <div className="container p-8 mx-auto mt-12 bg-white">
+    <div className="container p-1 mx-auto ">
       <div className="w-full overflow-x-auto">
         <div className="my-2">
-          <h3 className="text-xl font-bold tracking-wider">
+          <h3 className="text-xl font-bold tracking-wider text-center">
             Shopping Cart {cartItems.length}{" "}
             {cartItems.length === 1 ? "item" : "items"}
           </h3>
         </div>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100">
+            <tr className="">
               <th className="px-6 py-3 font-bold whitespace-nowrap">Product</th>
               <th className="px-6 py-3 font-bold whitespace-nowrap">Qty</th>
               <th className="px-6 py-3 font-bold whitespace-nowrap">Price</th>
-              <th className="px-6 py-3 font-bold whitespace-nowrap">Remove</th>
+              {/* <th className="px-6 py-3 font-bold whitespace-nowrap">Remove</th> */}
             </tr>
           </thead>
 
           <tbody>
             {cartItems.map((product) => (
               <tr key={product._id}>
-                <td className="p-4 px-6 text-center whitespace-nowrap object-contain h-28 w-56">
-                  <img className=" " src={product.thumbnail} />
-                  {product.title}
+                <td className="p-4 px-6 text-center whitespace-nowrap">
+                  <div className="flex justify-center">
+                    <img
+                      className="object-contain h-28 w-50"
+                      src={product.thumbnail}
+                    />
+                  </div>
+                  <div>{product.title}</div>
                 </td>
                 <td className="p-4 px-6 text-center whitespace-nowrap">
                   <div>
@@ -61,8 +66,9 @@ const ShoppingCart = () => {
                     <input
                       type="text"
                       name="qty"
+                      readOnly={true}
                       value={product.quantity}
-                      className="w-12 text-center bg-gray-100 outline-none"
+                      className="w-12 text-center outline-none"
                     />
                     <button
                       className="px-2 py-0 shadow"
@@ -77,18 +83,16 @@ const ShoppingCart = () => {
                   ${product.price}
                 </td>
 
-                <td className="p-4 px-6 text-center whitespace-nowrap">
+                {/* <td className="p-4 px-6 text-center whitespace-nowrap">
                   <button
                     className="px-2 py-0 text-red-100 bg-red-600 rounded"
                     onClick={() => handleRemoveItem(product)}
                   >
                     x
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
-
-            <td className="p-4 px-6 text-center whitespace-nowrap"></td>
           </tbody>
         </table>
 
