@@ -8,10 +8,10 @@ const ProductCard = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex justify-around flex-row  flex-wrap bg-base-200 ">
+    <div className="flex justify-center flex-row  flex-wrap max-w-[1200px] mx-auto m-2  ">
       {products.length > 0
         ? products.map((product) => (
-            <div key={product._id} className="m-2 shadow-xl flex-wrap  ">
+            <div key={product._id} className="m-2 shadow-xl flex-wrap bg-base-200">
               <figure className="w-96 ">
                 <img className="object-contain h-48 w-96"src={product.thumbnail} alt="Product Image" />
               </figure>
