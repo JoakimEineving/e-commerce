@@ -32,6 +32,22 @@ const createOrder = async (req, res) => {
   }
 };
 
+const getOrdersByUser = async (req, res) => {
+  try {
+    const email = req.userData.email
+    const order = await Order.find({ "shippingAddress.email": email });
+    if (!order) {
+      res.status(404);
+      throw new Error("Order not found");
+    } else {
+      res.status(200).json(order);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 
 
@@ -39,6 +55,6 @@ const createOrder = async (req, res) => {
     
 
 
-const orders = { createOrder };
+const orders = { createOrder, getOrdersByUser };
 
 module.exports = orders;

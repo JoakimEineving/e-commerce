@@ -30,6 +30,24 @@ const getOrders = async () => {
     return [];
   }
 };
+
+const getOrdersByUser = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.get(`${BASE_URL}/orders/getOrdersByUser`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
+    console.log(res.data)
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+
 const deleteOrder = async (orderNumber) => {
   try {
     const token = localStorage.getItem("token");
@@ -93,4 +111,5 @@ export default {
   orderDelivered,
   createOrder,
   deleteOrder,
+  getOrdersByUser,
 };
