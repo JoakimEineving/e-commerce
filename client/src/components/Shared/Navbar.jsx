@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { CartModal, LoginRegister, ShoppingCart } from "../index";
+import { useAdminCheck } from "../../hooks/useAdminCheck";
 
 const Navbar = () => {
+  const isAdmin = useAdminCheck();
   const cartItems = useSelector((state) => state.cart);
   const cartItemsNum = cartItems.length;
   const cartTotal = cartItems.reduce(
@@ -73,12 +75,19 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
+            {isAdmin && (
+              <li>
+                <Link to="/admin">
+                  <span className="justify-between">
+                    Admin Panel
+                    <span className="badge ml-2">Admin</span>
+                  </span>
+                </Link>
+              </li>
+            )}
             <li>
-              <Link to="/admin">
-                <span className="justify-between">
-                  Admin Panel
-                  <span className="badge ml-2">New</span>
-                </span>
+              <Link to="/orders">
+              <span>Orders</span>
               </Link>
             </li>
             <li>
@@ -91,9 +100,7 @@ const Navbar = () => {
         </div>
       </div>
       <CartModal />
-      
     </div>
-    
   );
 };
 

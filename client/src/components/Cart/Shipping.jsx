@@ -13,7 +13,7 @@ const Shipping = () => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  
+  const shippingCost = 10;
   const cartItems = useSelector(state => state.cart);
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
@@ -54,7 +54,7 @@ const Shipping = () => {
       setCity('');
       setPostalCode('');
 
-      window.location.href = "/";
+      window.location.href = "/checkout/success";
     }
   };
 
@@ -228,10 +228,10 @@ const Shipping = () => {
               </div>
 
               <div className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                Shipping:<span className="ml-2">$10</span>
+                Shipping:<span className="ml-2">${shippingCost}</span>
               </div>
               <div className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                Total<span className="ml-2">${cartTotal + 10}</span>
+                Total<span className="ml-2">${cartTotal + shippingCost}</span>
               </div>
             </div>
           </div>

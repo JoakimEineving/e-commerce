@@ -7,20 +7,11 @@ import {
   UserOverview,
   AccessError,
 } from "../../components/index";
+import { useAdminCheck } from "../../hooks/useAdminCheck";
 
 const AdminPage = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log(token);
-    if (token) {
-      const decodedToken = JSON.parse(window.atob(token.split(".")[1]));
-      console.log(decodedToken);
-      setIsAdmin(decodedToken.isAdmin);
-    }
-  }, []);
-
+  const isAdmin = useAdminCheck();
+  
   if (!isAdmin) {
     return (
       <div>

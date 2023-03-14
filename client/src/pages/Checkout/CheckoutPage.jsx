@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Shipping } from "../../components/index";
 
-const Checkout = () => {
+const CheckoutPage = () => {
   return (
     <div>
       <Navbar />
@@ -11,4 +11,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+export default CheckoutPage;
