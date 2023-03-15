@@ -1,12 +1,11 @@
 import React from "react";
-import { Navbar, Shipping } from "../../components/index";
+import { Navbar, Checkout } from "../../components/index";
 
 const CheckoutPage = () => {
   return (
     <div>
       <Navbar />
-        <Shipping />
-      
+        <Checkout />
     </div>
   );
 };

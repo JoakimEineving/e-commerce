@@ -6,7 +6,7 @@ export { default as Header } from "./Header/Header";
 
 export { default as CartModal } from "./Cart/CartModal";
 export { default as ShoppingCart } from "./Cart/ShoppingCart";
-export { default as Shipping } from "./Cart/Shipping";
+export { default as Checkout } from "./Cart/Checkout";
 export { default as OrderSuccess } from "./Cart/OrderSuccess";
 export { default as ProgressBar } from "./Cart/ProgressBar";
 
