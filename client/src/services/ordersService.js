@@ -105,6 +105,26 @@ const orderDelivered = async (orderNumber) => {
   }
 };
 
+const createPaymentIntent = async (orderData) => {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await axios.post(
+      `${BASE_URL}/payment/createPaymentIntent`,
+      orderData,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+
 export default {
   getOrders,
   orderPaid,
@@ -112,4 +132,5 @@ export default {
   createOrder,
   deleteOrder,
   getOrdersByUser,
+  createPaymentIntent
 };
