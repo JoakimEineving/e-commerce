@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ProgressBar from "./ProgressBar";
+import {ProgressBar, PaymentForm} from "../index";
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 import { subtractQuantity } from "../../redux/cartSlice";
 import ordersService from "../../services/ordersService";
+
 
 const Shipping = () => {
   const dispatch = useDispatch();
@@ -237,6 +238,7 @@ const Shipping = () => {
           </div>
         </div>
       </div>
+      <PaymentForm />
     </div>
   );
 };
