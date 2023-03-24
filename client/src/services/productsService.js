@@ -7,13 +7,14 @@ const uploadProduct = async (productData) => {
     const token = localStorage.getItem("token");
     const res = await axios.post(
       `${BASE_URL}/admin/uploadProduct`,
-      productData, {
+      productData,
+      {
         headers: {
           Authorization: `${token}`,
         },
       }
     );
-      return res.data;
+    return res.data;
   } catch (error) {
     console.error(error);
     return null;
@@ -33,13 +34,11 @@ const getProducts = async () => {
 const deleteProduct = async (id) => {
   try {
     const token = localStorage.getItem("token");
-    const res = await axios.delete(
-      `${BASE_URL}/admin/deleteProduct/${id}`,{
-        headers: {
-          Authorization: `${token}`,
-        },
-      }
-    );
+    const res = await axios.delete(`${BASE_URL}/admin/deleteProduct/${id}`, {
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
     return res.data;
   } catch (error) {
     console.error(error);

@@ -3,8 +3,7 @@ import { BASE_URL } from "../../config";
 
 const signIn = async (accountData) => {
   try {
-    const res = await axios.post(`${BASE_URL}/accounts/signIn`, accountData, 
-    );
+    const res = await axios.post(`${BASE_URL}/accounts/signIn`, accountData);
     if (res.data && res.data._id) {
       localStorage.setItem("token", res.data.token);
       return res.data;
@@ -16,7 +15,7 @@ const signIn = async (accountData) => {
 };
 const signUp = async (accountData) => {
   try {
-    const res = await axios.post(`${BASE_URL}/accounts/signUp`, accountData,);
+    const res = await axios.post(`${BASE_URL}/accounts/signUp`, accountData);
     console.log(res.data);
     return res.data;
   } catch (error) {
@@ -53,7 +52,6 @@ const deleteAccount = async (id) => {
     return null;
   }
 };
-
 
 export default {
   getAccounts,

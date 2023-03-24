@@ -6,8 +6,6 @@ import AdminPage from "./pages/Admin/AdminPage";
 import OrderSuccessPage from "./pages/Checkout/OrderSuccessPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import OrdersPage from "./pages/User/OrdersPage";
-// import Shipping from "./pages/checkout/shipping";
-
 
 function App() {
   document.title = "E-commerce";
@@ -18,7 +16,6 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        {/* <Route path="/checkout" element={<Cart />} /> */}
         <Route path="/checkout/shipping" element={<CheckoutPage />} />
         <Route path="/checkout/success" element={<OrderSuccessPage />} />
       </Routes>
