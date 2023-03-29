@@ -28,21 +28,21 @@ const cartSlice = createSlice({
       }
     },
     subtractQuantity: (state, action) => {
-        const item = state.find((item) => item._id === action.payload._id);
-        if (item && item.quantity > 1) {
-            item.quantity--;
-            localStorage.setItem("cart", JSON.stringify(state));
-        } else if (item && item.quantity === 1) {
-            state.splice(state.indexOf(item), 1);
-            localStorage.setItem("cart", JSON.stringify(state));
-        }
+      const item = state.find((item) => item._id === action.payload._id);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        localStorage.setItem("cart", JSON.stringify(state));
+      } else if (item && item.quantity === 1) {
+        state.splice(state.indexOf(item), 1);
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
     },
     addQuantity: (state, action) => {
-        const item = state.find((item) => item._id === action.payload._id);
-        if (item) {
-            item.quantity++;
-            localStorage.setItem("cart", JSON.stringify(state));
-        }
+      const item = state.find((item) => item._id === action.payload._id);
+      if (item) {
+        item.quantity++;
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
     },
     clearCart: (state) => {
       state.splice(0, state.length);
@@ -51,6 +51,12 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, updateQuantity, subtractQuantity, addQuantity, clearCart } =
-  cartSlice.actions;
+export const {
+  addItem,
+  removeItem,
+  updateQuantity,
+  subtractQuantity,
+  addQuantity,
+  clearCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
