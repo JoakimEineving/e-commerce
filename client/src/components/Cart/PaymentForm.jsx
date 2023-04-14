@@ -12,7 +12,7 @@ const CheckoutForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    const orderData = { amount: 10 };
+    const orderData = { amount: 1000};
     const paymentIntent = await ordersService.createPaymentIntent(orderData);
 
     if (!paymentIntent) {
@@ -41,28 +41,47 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div>
-      <h1>Checkout</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="amount">Amount:</label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            min="1"
-            defaultValue="10"
-          />
-        </div>
-        <div>
-          <label>Card details:</label>
-          <CardElement />
-        </div>
-        <button type="submit" disabled={!stripe || loading}>
-          {loading ? "Processing..." : "Pay"}
-        </button>
-      </form>
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+  <h1 class="text-2xl font-bold mb-6">Checkout</h1>
+  <form onSubmit={handleSubmit} class="space-y-4">
+  <div class="flex flex-col">
+      <label htmlFor="name" class="text-sm font-semibold text-gray-700">Full Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="John Doe"
+        required
+        class="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
     </div>
+    <div class="flex flex-col">
+      <label htmlFor="amount" class="text-sm font-semibold text-gray-700">Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        min="1"
+        defaultValue="10"
+        class="border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+    </div>
+    <div class="flex flex-col">
+      <label class="text-sm font-semibold text-gray-700">Card details:</label>
+      <div class="border border-gray-300 p-2 rounded-lg">
+        <CardElement />
+      </div>
+    </div>
+    <button
+      type="submit"
+      disabled={!stripe || loading}
+      class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+    >
+      {loading ? "Processing..." : "Pay"}
+    </button>
+  </form>
+</div>
+
   );
 };
 

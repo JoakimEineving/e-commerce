@@ -6,6 +6,7 @@ import AdminPage from "./pages/Admin/AdminPage";
 import OrderSuccessPage from "./pages/Checkout/OrderSuccessPage";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import OrdersPage from "./pages/User/OrdersPage";
+import PaymentPage from "./pages/Checkout/PaymentPage";
 
 function App() {
   document.title = "E-commerce";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/checkout/shipping" element={<CheckoutPage />} />
+        <Route path="/checkout/payment" element={<PaymentPage />} />
         <Route path="/checkout/success" element={<OrderSuccessPage />} />
       </Routes>
     </BrowserRouter>
