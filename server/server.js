@@ -1,31 +1,33 @@
-const dotenv = require("dotenv");
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const productRouter = require("./routes/productRoute");
-const orderRouter = require("./routes/orderRoute");
-const accountRouter = require("./routes/accountRoute");
-const adminRouter = require("./routes/adminRoute");
-const authAdmin = require("./middleware/authAdmin");
+const dotenv = require("dotenv")
+const express = require("express")
+const mongoose = require("mongoose")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const productRouter = require("./routes/productRoute")
+const orderRouter = require("./routes/orderRoute")
+const accountRouter = require("./routes/accountRoute")
+const adminRouter = require("./routes/adminRoute")
+const paymentRouter = require("./routes/paymentRoute")
+const authAdmin = require("./middleware/authAdmin")
 
 
 
 dotenv.config();
+console.log(process.env);
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
-app.use(cors());
+app.use(cors())
 
-mongoose.set("strictQuery", true);
-const uri = process.env.MONGO_URI;
+mongoose.set("strictQuery", true)
+const uri = process.env.MONGO_URI
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,14 +36,15 @@ mongoose.connect(uri, {
 app.get("/", (req, res) => {
   res.json({
     message: "Welcome to the server",
-  });
-});
+  })
+})
 
 app.use(express.json());
-app.use('/accounts', accountRouter);
-app.use('/products', productRouter);
+app.use('/accounts', accountRouter)
+app.use('/products', productRouter)
 app.use('/orders', orderRouter)
-app.use('/admin', authAdmin, adminRouter);
+app.use('/admin', authAdmin, adminRouter)
+app.use('/payment', paymentRouter)
 
 app.listen(port, () => {
   console.log(`Server is running on port http://localhost:${port}`);

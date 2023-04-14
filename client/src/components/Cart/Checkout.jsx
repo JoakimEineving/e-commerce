@@ -238,7 +238,6 @@ const Shipping = () => {
           </div>
         </div>
       </div>
-      <PaymentForm />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const createOrder = async (req, res) => {
 
 const getOrdersByUser = async (req, res) => {
   try {
-    const email = req.userData.email
+    const email = req.userData.email;
     const order = await Order.find({ "shippingAddress.email": email });
     if (!order) {
       res.status(404);
@@ -46,14 +46,6 @@ const getOrdersByUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-
-
-
-
-
-    
-
 
 const orders = { createOrder, getOrdersByUser };
 
