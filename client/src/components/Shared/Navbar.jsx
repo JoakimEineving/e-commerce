@@ -76,6 +76,7 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {isAdmin && (
+              <ul>
               <li>
                 <Link to="/admin">
                   <span className="justify-between">
@@ -84,7 +85,17 @@ const Navbar = () => {
                   </span>
                 </Link>
               </li>
+              <li>
+                <Link to="/admin/manageproducts">
+                  <span className="justify-between">
+                    Products
+                    <span className="badge ml-2">Admin</span>
+                  </span>
+                </Link>
+              </li>
+            </ul>
             )}
+            
             <li>
               <Link to="/orders">
               <span>Orders</span>
