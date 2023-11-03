@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
 import { subtractQuantity } from "../../redux/cartSlice";
 import ordersService from "../../services/ordersService";
+import { Alert } from "../index";
+import useAlert from "../../hooks/useAlert";
 
 
 const Shipping = () => {
@@ -17,6 +19,7 @@ const Shipping = () => {
   const shippingCost = 10;
   const cartItems = useSelector(state => state.cart);
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const [alertType, alertMessage, showAlert] = useAlert();
 
   const handleSubtractQuantity = (product) => {
     dispatch(subtractQuantity(product));
@@ -56,7 +59,10 @@ const Shipping = () => {
       setPostalCode('');
 
       window.location.href = "/checkout/success";
+    } else {
+      showAlert("Error, please try again.", "error");
     }
+
   };
 
   return (
@@ -238,6 +244,7 @@ const Shipping = () => {
           </div>
         </div>
       </div>
+      {alertType && <Alert msg={alertMessage} type={alertType}/>}
     </div>
   );
 };
